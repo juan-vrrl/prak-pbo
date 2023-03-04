@@ -1,3 +1,6 @@
+#Juan Verrel Tanuwijaya, 121140072
+#Prak 2
+
 class Mahasiswa:    
     def __init__(self, nama, nim, kelas_pbo_siakad,jumlah_sks):
         self.nama=nama
