@@ -4,6 +4,7 @@
 #Inisiasi Class dan Atribut
 
 class AkunBank:
+    #Inisiasi Variabel Class
     list_pelanggan=[]
     
     #Konstruktor
@@ -11,6 +12,7 @@ class AkunBank:
         self.__no_pelanggan=no
         self.__nama_pelanggan=nama
         self.__jumlah_saldo=saldo
+        #Setiap objek diinisiasi no rekening objek tersebut akan di masukkan kedalam variabel class list_pelanggan
         self.list_pelanggan.append(self.__no_pelanggan)
       
     #Fungsi untuk menampilkan pilihan menu (diinput user)  
