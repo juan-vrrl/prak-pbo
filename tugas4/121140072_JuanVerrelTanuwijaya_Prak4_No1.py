@@ -52,36 +52,23 @@ class PSU(Komputer):
     def tampil(self):
         print(f"PSU {self.nama} produksi {self.merk}")
 
-#Pembuatan list rakit untuk menyimpan list komputer1 & komputer2
+#Pembuatan list rakit untuk menyimpan objek
 rakit=[]
-komputer1=[]
-komputer2=[]
 
-#Pembuatan Objek dan memasukkan objek kedalam list komputer
+#Pembuatan Objek
 p1 = Processor('Core i7 7740X',"Baru",4350000,'Intel',4,'4.3GHz')
 p2 = Processor('Ryzen 5 3600',"Second",250000,'AMD', 4,'4.3GHz')
-komputer1.append(p1)
-komputer2.append(p2)
 ram1 = RAM('DDR4 SODimm PC19200/2400MHz',"Baru",328000,'V-Gen','4GB')
 ram2 = RAM('DDR4 2400MHz',"Second ",328000,'G.SKILL', '4GB')
-komputer1.append(ram1)
-komputer2.append(ram2)
 hdd1 = HDD('HDD 2.5 inch',"Baru", 295000,'Seagate','500GB',7200)
 hdd2 = HDD('HDD 2.5 inch',"Second", 295000,'Seagate', '1000GB',7200)
-komputer1.append(hdd1)
-komputer2.append(hdd2)
 vga1 = VGA('VGA GTX 1050',"Baru",'Asus',250000,'2GB')
 vga2 = VGA('1060Ti', "Second", 250000,'Asus','8GB')
-komputer1.append(vga1)
-komputer2.append(vga2)
 psu1 = PSU('Corsair V550', "Baru", 250000,'Corsair','500W')
 psu2 = PSU('Corsair V550', "Second", 250000,'Corsair','500W')
-komputer1.append(psu1)
-komputer2.append(psu2)
 
-#memasukkan list komputer1 dan komputer2 kedalam lisr rakit
-rakit.append(komputer1)
-rakit.append(komputer2)
+#memasukkan kumpulan objek ke dalam list rakit sebagai 2 list berbeda
+rakit.extend([[p1,ram1,hdd1,vga1,psu1],[p2,ram2,hdd2,vga2,psu2]])
 
 #Pemanggilan Fungsi tampil dalam list rakit menggunakan nested loop for
 for x in range(len(rakit)):
