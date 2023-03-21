@@ -1,3 +1,6 @@
+#Juan Verrel Tanuwijaya, 121140072
+#Prak 4, no 1
+
 #Inisiasi Class Komputer dan Atributnya
 class Komputer:
     def __init__(self,nama,jenis,harga,merk):
