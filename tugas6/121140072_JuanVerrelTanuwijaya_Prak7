@@ -1,0 +1,98 @@
+import tkinter as tk
+from tkinter import messagebox, simpledialog
+import os
+
+def create():
+    #menginput nama folder dan lokasi direktori
+    nama_folder = entry_folder.get()
+    direktori = entry_dir.get()
+
+    #Membuat Folder
+    try:
+        os.mkdir(os.path.join(direktori, nama_folder))
+        messagebox.showinfo("Berhasil", f"Folder '{nama_folder}' berhasil dibuat di {direktori}")
+    
+    #Jika file sudah ada di direktori
+    except FileExistsError:
+        messagebox.showerror("Gagal", f"Folder '{nama_folder}' sudah ada di {direktori}")
+        return
+    
+    #Jika direktori tidak ditemukan maka akan dibuat direktori baru
+    except FileNotFoundError:
+        os.makedirs(direktori)
+        messagebox.showinfo("Membuat Direktori ", f"Direktori tidak ditemukan, membuat {direktori}")
+        os.mkdir(os.path.join(direktori, nama_folder))
+        messagebox.showinfo("Berhasil", f"Folder '{nama_folder}' berhasil dibuat di {direktori}")
+
+def rename():
+    #Menginput nama folder dan lokasi direktori
+    nama_folder = entry_folder.get()
+    direktori = entry_dir.get()
+    lokasi_folder_lama = os.path.join(direktori, nama_folder)
+    nama_folder_baru = tk.simpledialog.askstring("Rename Folder", "Nama Folder Baru :")
+
+    #Rename folder
+    try:
+        new_lokasi_folder = os.path.join(direktori, nama_folder_baru)
+        os.rename(lokasi_folder_lama, new_lokasi_folder)
+        messagebox.showinfo("Berhasil", f"Folder '{nama_folder}' berhasil di rename menjadi '{nama_folder_baru}' di {direktori}")
+    
+    #Jika folder tidak ditemukan
+    except FileNotFoundError:
+        messagebox.showerror("Gagal", f"Folder '{nama_folder}' tidak ditemukan di {direktori}")
+        return
+
+def delete():
+    #Menginput nama folder dan lokasi direktori
+    nama_folder = entry_folder.get()
+    direktori = entry_dir.get()
+    lokasi_folder = os.path.join(direktori, nama_folder)
+
+    #Hapus folder
+    try:
+        os.rmdir(lokasi_folder)
+        messagebox.showinfo("Berhasil", f"Folder '{nama_folder}' berhasil dihapus di {direktori}")
+    
+    #Jika folder tidak ditemukan
+    except FileNotFoundError:
+        messagebox.showerror("Gagal", f"Folder '{nama_folder}' tidak ditemukan di {direktori}")
+        return
+
+# Main
+
+#Membuat variabel window sebagai master
+window=tk.Tk()
+window.title("Folder Manager")
+window.rowconfigure(1)
+window.columnconfigure(0)
+window.resizable(False,False)
+
+#WIDGET
+
+#Frame
+window_frame1 = tk.Frame(window)
+window_frame1.grid(row=0, column=0)
+window_frame2 = tk.Frame(window)
+window_frame2.grid(row=1, column=0)
+
+#Label
+label_folder = tk.Label(window_frame1, text="Nama Folder :")
+label_folder.grid(row=0, column=0, padx=10, pady=10)
+label_dir = tk.Label(window_frame1, text="Direktori :")
+label_dir.grid(row=1, column=0, padx=10, pady=10)
+
+#Entry
+entry_folder = tk.Entry(window_frame1)
+entry_folder.grid(row=0, column=1, padx=10, pady=10)
+entry_dir = tk.Entry(window_frame1)
+entry_dir.grid(row=1, column=1, padx=10, pady=10)
+
+#Button
+button_create = tk.Button(window_frame2, text="Create", command=create)
+button_create.grid(row=2, column=0, padx=10, pady=15)
+button_rename = tk.Button(window_frame2, text="Rename", command=rename)
+button_rename.grid(row=2, column=1, padx=10, pady=15)
+button_delete = tk.Button(window_frame2, text="Delete", command=delete)
+button_delete.grid(row=2, column=2, padx=10, pady=15)
+
+window.mainloop()
